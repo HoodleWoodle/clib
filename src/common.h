@@ -17,11 +17,15 @@ typedef unsigned long size_t;
 #define JOIN_5(a, b, c, d, e) JOIN_5_AGAIN(a, b, c, d, e)
 #define JOIN_5_AGAIN(a, b, c, d, e)	a ## b ## c ## d ## e
 
+#define JOIN_6(a, b, c, d, e, f) JOIN_6_AGAIN(a, b, c, d, e, f)
+#define JOIN_6_AGAIN(a, b, c, d, e, f) a ## b ## c ## d ## e ## f
+
 // identifier
 #define PREFIX_LIB hw_
 
-// (prefixed) change identifier
+// (prefixed) change identifier/struct/function
 #define CHI(ident) JOIN(PREFIX_LIB, ident)
-#define PCHI(ident) JOIN_4(PREFIX_LIB, PREFIX, _, ident)
+#define PCHS(sname) JOIN_4(PREFIX_LIB, PREFIX, _, sname)
+#define PCHF(sname, fname) JOIN_6(PREFIX_LIB, PREFIX, _, sname, _, fname)
 
 #endif // HW_COMMON_H
