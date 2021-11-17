@@ -16,7 +16,6 @@ static PCHS(NAME_NODE_T)* PCHF(NAME, emplace_between)(PCHS(NAME_T)* list, PCHS(N
 		node->next->prev = node;
 
 	list->size++;
-
 	return node;
 }
 
@@ -172,6 +171,6 @@ ELEM_TYPE PCHF(NAME, remove)(PCHS(NAME_T)* list, size_t index)
 
 void PCHF(NAME, foreach)(PCHS(NAME_T)* list, PCHF(NAME, func) func)
 {
-	for (PCHS(NAME_NODE_T)* current = list->first; current; current = current->next)
+  for (PCHS(NAME_NODE_T)* current = list->first; current; current = current->next)
 		func(current->data);
 }
