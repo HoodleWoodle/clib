@@ -2,10 +2,9 @@
 
 #include <stdlib.h>
 
-// void* list
+// void*
 #undef ELEM_TYPE
 #define ELEM_TYPE void*
-#undef ELEM_TYPE_ASSIGN
 
 #undef VAL_DEFAULT
 #define VAL_DEFAULT NULL
@@ -15,10 +14,9 @@
 
 #include "template/linked_list_inl.c"
 
-// int list
+// int
 #undef ELEM_TYPE
 #define ELEM_TYPE int
-#undef ELEM_TYPE_ASSIGN
 
 #undef VAL_DEFAULT
 #define VAL_DEFAULT 0

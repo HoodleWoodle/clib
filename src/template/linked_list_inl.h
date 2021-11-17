@@ -1,7 +1,3 @@
-#ifndef ELEM_TYPE_ASSIGN
-#define ELEM_TYPE_ASSIGN(x, y) x = y
-#endif // ELEM_TYPE_ASSIGN
-
 // list iteration function pointer
 typedef void(*PCHF(NAME, func))(ELEM_TYPE data);
 
@@ -21,14 +17,14 @@ typedef struct PCHS(NAME)
 	size_t size;
 } PCHS(NAME_T);
 
-// used to newialize a list
+// used to create a list
 void PCHF(NAME, new)(PCHS(NAME_T)**);
 
 // used to destroy a list (the data of the list is NOT freed)
 void PCHF(NAME, destroy)(PCHS(NAME_T)**);
 
 // returns the number of elements in the list
-size_t PCHF(NAME, size)(PCHS(NAME_T)* NAME);
+size_t PCHF(NAME, size)(PCHS(NAME_T)*);
 
 // insert an element at the end of the list
 void PCHF(NAME, push_back)(PCHS(NAME_T)*, ELEM_TYPE data);
@@ -68,7 +64,7 @@ ELEM_TYPE PCHF(NAME, pop_front)(PCHS(NAME_T)*);
 // if the element with the specified index does not exists - the behavior is UNDEFINED
 ELEM_TYPE PCHF(NAME, remove)(PCHS(NAME_T)*, size_t index);
 
-// caNAMEs for each element in the list (from first to last) the function
+// calls for each element in the list (from first to last) the function
 void PCHF(NAME, foreach)(PCHS(NAME_T)*, PCHF(NAME, func) func);
 
 // TODO: push_back_all (list2 to list1, destroy list_2)

@@ -9,7 +9,7 @@
 #define NAME_NODE JOIN(NAME, n)
 #define NAME_NODE_T JOIN(NAME_NODE, _t)
 
-// void* list
+// void*
 #undef ELEM_TYPE
 #define ELEM_TYPE void*
 
@@ -18,7 +18,7 @@
 
 #include "template/linked_list_inl.h"
 
-// int list
+// int
 #undef ELEM_TYPE
 #define ELEM_TYPE int
 

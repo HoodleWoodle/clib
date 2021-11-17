@@ -43,5 +43,7 @@ int main(void)
 	hw_int_list_pop_front(list);				/* DEBUG(); */ ASSERT_4(4, 3, 7, 8);
 
 	hw_int_list_destroy(&list);
+
+	printf("TEST - SUCCESS\n");
 	return 0;
 }
