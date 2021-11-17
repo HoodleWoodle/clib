@@ -66,7 +66,7 @@ static ELEM_TYPE PCHF(NAME, remove_node)(PCHS(NAME_T)* ll, PCHS(NAME_NODE_T)* no
 /* implementation */
 /* ############## */
 
-void PCHF(NAME, init)(PCHS(NAME_T)** ll)
+void PCHF(NAME, new)(PCHS(NAME_T)** ll)
 {
 	*ll = (PCHS(NAME_T)*)malloc(sizeof(PCHS(NAME_T)));
 	(*ll)->first = NULL;

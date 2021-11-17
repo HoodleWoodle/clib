@@ -21,8 +21,8 @@ typedef struct PCHS(NAME)
 	size_t size;
 } PCHS(NAME_T);
 
-// used to initialize a list
-void PCHF(NAME, init)(PCHS(NAME_T)**);
+// used to newialize a list
+void PCHF(NAME, new)(PCHS(NAME_T)**);
 
 // used to destroy a list (the data of the list is NOT freed)
 void PCHF(NAME, destroy)(PCHS(NAME_T)**);
@@ -71,4 +71,12 @@ ELEM_TYPE PCHF(NAME, remove)(PCHS(NAME_T)*, size_t index);
 // caNAMEs for each element in the list (from first to last) the function
 void PCHF(NAME, foreach)(PCHS(NAME_T)*, PCHF(NAME, func) func);
 
+// TODO: push_back_all (list2 to list1, destroy list_2)
+// TODO: push_front_all (list2 to list1, destroy list_2)
+// TODO: insert_after_all (list2 to list1, destroy list_2)
+// TODO: insert_before_all (list2 to list1, destroy list_2)
+// TODO: sublist
+// TODO: reverse
+// TODO: clone_shallow
+// TODO: clone_deep
 // TODO: sort_by
