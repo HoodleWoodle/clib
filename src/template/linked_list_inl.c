@@ -2,10 +2,10 @@
 /* internal utility */
 /* ################ */
 
-// does NOT handle ll->first and ll->last
-static PCHI(lln_t)* PCHI(ll_emplace_between)(PCHI(ll_t)* ll, PCHI(lln_t)* prev, PCHI(lln_t)* next, ELEM_TYPE data)
+// does NOT handle list's first and last
+static PCHS(NAME_NODE_T)* PCHF(NAME, emplace_between)(PCHS(NAME_T)* ll, PCHS(NAME_NODE_T)* prev, PCHS(NAME_NODE_T)* next, ELEM_TYPE data)
 {
-	PCHI(lln_t)* node = (PCHI(lln_t)*)malloc(sizeof(PCHI(lln_t)));
+	PCHS(NAME_NODE_T)* node = (PCHS(NAME_NODE_T)*)malloc(sizeof(PCHS(NAME_NODE_T)));
 	node->prev = prev;
 	node->next = next;
 	node->data = data;
@@ -20,20 +20,20 @@ static PCHI(lln_t)* PCHI(ll_emplace_between)(PCHI(ll_t)* ll, PCHI(lln_t)* prev, 
 	return node;
 }
 
-static PCHI(lln_t)* PCHI(ll_get_node_at)(PCHI(ll_t)* ll, size_t index)
+static PCHS(NAME_NODE_T)* PCHF(NAME, get_node_at)(PCHS(NAME_T)* ll, size_t index)
 {
 	if (index >= ll->size) return NULL;
 
 	if (index < ll->size / 2)
 	{
-		PCHI(lln_t)* node = ll->first;
+		PCHS(NAME_NODE_T)* node = ll->first;
 		for (size_t i = 0; i != index; i++)
 			node = node->next;
 		return node;
 	}
 	else
 	{
-		PCHI(lln_t)* node = ll->last;
+		PCHS(NAME_NODE_T)* node = ll->last;
 		for (size_t i = ll->size - 1; i != index; i--)
 			node = node->prev;
 		return node;
@@ -41,7 +41,7 @@ static PCHI(lln_t)* PCHI(ll_get_node_at)(PCHI(ll_t)* ll, size_t index)
 }
 
 // DOES handle ll->first and ll->last
-static ELEM_TYPE PCHI(ll_remove_node)(PCHI(ll_t)* ll, PCHI(lln_t)* node)
+static ELEM_TYPE PCHF(NAME, remove_node)(PCHS(NAME_T)* ll, PCHS(NAME_NODE_T)* node)
 {
 	if (node->prev)
 		node->prev->next = node->next;
@@ -66,112 +66,112 @@ static ELEM_TYPE PCHI(ll_remove_node)(PCHI(ll_t)* ll, PCHI(lln_t)* node)
 /* implementation */
 /* ############## */
 
-void PCHI(ll_init)(PCHI(ll_t)** ll)
+void PCHF(NAME, init)(PCHS(NAME_T)** ll)
 {
-	*ll = (PCHI(ll_t)*)malloc(sizeof(PCHI(ll_t)));
+	*ll = (PCHS(NAME_T)*)malloc(sizeof(PCHS(NAME_T)));
 	(*ll)->first = NULL;
 	(*ll)->last = NULL;
 	(*ll)->size = 0;
 }
 
-void PCHI(ll_free)(PCHI(ll_t)** ll)
+void PCHF(NAME, destroy)(PCHS(NAME_T)** ll)
 {
-	PCHI(lln_t)* current = (*ll)->first;
+	PCHS(NAME_NODE_T)* current = (*ll)->first;
 	while (current)
 	{
-		PCHI(lln_t)* next = current->next;
+		PCHS(NAME_NODE_T)* next = current->next;
 		free(current);
 		current = next;
 	}
 	free(*ll);
 }
 
-size_t PCHI(ll_size)(PCHI(ll_t)* ll)
+size_t PCHF(NAME, size)(PCHS(NAME_T)* ll)
 {
 	return ll->size;
 }
 
-void PCHI(ll_push_back)(PCHI(ll_t)* ll, ELEM_TYPE data)
+void PCHF(NAME, push_back)(PCHS(NAME_T)* ll, ELEM_TYPE data)
 {
-	ll->last = PCHI(ll_emplace_between)(ll, ll->last, NULL, data);
+	ll->last = PCHF(NAME, emplace_between)(ll, ll->last, NULL, data);
 	if (!ll->first)
 		ll->first = ll->last;
 }
 
-void PCHI(ll_push_front)(PCHI(ll_t)* ll, ELEM_TYPE data)
+void PCHF(NAME, push_front)(PCHS(NAME_T)* ll, ELEM_TYPE data)
 {
-	ll->first = PCHI(ll_emplace_between)(ll, NULL, ll->first, data);
+	ll->first = PCHF(NAME, emplace_between)(ll, NULL, ll->first, data);
 	if (!ll->last)
 		ll->last = ll->first;
 }
 
-void PCHI(ll_insert_after)(PCHI(ll_t)* ll, size_t index, ELEM_TYPE data)
+void PCHF(NAME, insert_after)(PCHS(NAME_T)* ll, size_t index, ELEM_TYPE data)
 {
-	PCHI(lln_t)* prev = PCHI(ll_get_node_at)(ll, index);
+	PCHS(NAME_NODE_T)* prev = PCHF(NAME, get_node_at)(ll, index);
 	if (!prev) return; // define "undefined behavior" ...
 
-	PCHI(lln_t)* next = prev->next;
-	PCHI(lln_t)* node = PCHI(ll_emplace_between)(ll, prev, next, data);
+	PCHS(NAME_NODE_T)* next = prev->next;
+	PCHS(NAME_NODE_T)* node = PCHF(NAME, emplace_between)(ll, prev, next, data);
 	if (next == NULL)
 		ll->last = node;
 }
 
-void PCHI(ll_insert_before)(PCHI(ll_t)* ll, size_t index, ELEM_TYPE data)
+void PCHF(NAME, insert_before)(PCHS(NAME_T)* ll, size_t index, ELEM_TYPE data)
 {
-	PCHI(lln_t)* next = PCHI(ll_get_node_at)(ll, index);
+	PCHS(NAME_NODE_T)* next = PCHF(NAME, get_node_at)(ll, index);
 	if (!next) return; // define "undefined behavior" ...
 
-	PCHI(lln_t)* prev = next->prev;
-	PCHI(lln_t)* node = PCHI(ll_emplace_between)(ll, prev, next, data);
+	PCHS(NAME_NODE_T)* prev = next->prev;
+	PCHS(NAME_NODE_T)* node = PCHF(NAME, emplace_between)(ll, prev, next, data);
 	if (prev == NULL)
 		ll->first = node;
 }
 
-ELEM_TYPE PCHI(ll_peek_back)(PCHI(ll_t)* ll)
+ELEM_TYPE PCHF(NAME, peek_back)(PCHS(NAME_T)* ll)
 {
 	if (ll->size == 0) return VAL_DEFAULT; // define "undefined behavior" ...
 	return ll->last->data;
 }
 
-ELEM_TYPE PCHI(ll_peek_front)(PCHI(ll_t)* ll)
+ELEM_TYPE PCHF(NAME, peek_front)(PCHS(NAME_T)* ll)
 {
 	if (ll->size == 0) return VAL_DEFAULT; // define "undefined behavior" ...
 	return ll->first->data;
 }
 
-ELEM_TYPE PCHI(ll_get)(PCHI(ll_t)* ll, size_t index)
+ELEM_TYPE PCHF(NAME, get)(PCHS(NAME_T)* ll, size_t index)
 {
-	PCHI(lln_t)* node = PCHI(ll_get_node_at)(ll, index);
+	PCHS(NAME_NODE_T)* node = PCHF(NAME, get_node_at)(ll, index);
 	if (!node) return VAL_DEFAULT; // define "undefined behavior" ...
 	return node->data;
 }
 
-ELEM_TYPE PCHI(ll_pop_back)(PCHI(ll_t)* ll)
+ELEM_TYPE PCHF(NAME, pop_back)(PCHS(NAME_T)* ll)
 {
 	if (ll->size == 0) return VAL_DEFAULT; // define "undefined behavior" ...
 
-	PCHI(lln_t)* node = ll->last;
-	return PCHI(ll_remove_node)(ll, node);
+	PCHS(NAME_NODE_T)* node = ll->last;
+	return PCHF(NAME, remove_node)(ll, node);
 }
 
-ELEM_TYPE PCHI(ll_pop_front)(PCHI(ll_t)* ll)
+ELEM_TYPE PCHF(NAME, pop_front)(PCHS(NAME_T)* ll)
 {
 	if (ll->size == 0) return VAL_DEFAULT; // define "undefined behavior" ...
 
-	PCHI(lln_t)* node = ll->first;
-	return PCHI(ll_remove_node)(ll, node);
+	PCHS(NAME_NODE_T)* node = ll->first;
+	return PCHF(NAME, remove_node)(ll, node);
 }
 
-ELEM_TYPE PCHI(ll_remove)(PCHI(ll_t)* ll, size_t index)
+ELEM_TYPE PCHF(NAME, remove)(PCHS(NAME_T)* ll, size_t index)
 {
-	PCHI(lln_t)* node = PCHI(ll_get_node_at)(ll, index);
+	PCHS(NAME_NODE_T)* node = PCHF(NAME, get_node_at)(ll, index);
 	if (!node) return VAL_DEFAULT; // define "undefined behavior" ...
 
-	return PCHI(ll_remove_node)(ll, node);
+	return PCHF(NAME, remove_node)(ll, node);
 }
 
-void PCHI(ll_foreach)(PCHI(ll_t)* ll, PCHI(ll_func) func)
+void PCHF(NAME, foreach)(PCHS(NAME_T)* ll, PCHF(NAME, func) func)
 {
-	for (PCHI(lln_t)* current = ll->first; current; current = current->next)
+	for (PCHS(NAME_NODE_T)* current = ll->first; current; current = current->next)
 		func(current->data);
 }

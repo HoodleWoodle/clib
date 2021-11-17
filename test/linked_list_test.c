@@ -3,8 +3,8 @@
 
 #include "linked_list.h"
 
-#define ASSERT_LEN(len)		assert(hw_int_ll_size(list) == len)
-#define ASSERT_AT(idx, val)	assert(hw_int_ll_get(list, idx) == val)
+#define ASSERT_LEN(len)		assert(hw_int_list_size(l) == len)
+#define ASSERT_AT(idx, val)	assert(hw_int_list_get(l, idx) == val)
 
 #define ASSERT_0				ASSERT_LEN(0)
 #define ASSERT_1(a)				ASSERT_LEN(1); ASSERT_AT(0, a)
@@ -21,27 +21,27 @@ int main(void)
 {
 	int idx;
 
-	hw_int_ll_t* list;
-	hw_int_ll_init(&list);						/* DEBUG(); */ ASSERT_LEN(0);
+	hw_int_list_t* l;
+	hw_int_list_init(&l);						/* DEBUG(); */ ASSERT_LEN(0);
 
-	hw_int_ll_push_back(list, 4);				/* DEBUG(); */ ASSERT_1(4);
-	hw_int_ll_push_back(list, 5);				/* DEBUG(); */ ASSERT_2(4, 5);
-	hw_int_ll_push_back(list, 7);				/* DEBUG(); */ ASSERT_3(4, 5, 7);
+	hw_int_list_push_back(l, 4);				/* DEBUG(); */ ASSERT_1(4);
+	hw_int_list_push_back(l, 5);				/* DEBUG(); */ ASSERT_2(4, 5);
+	hw_int_list_push_back(l, 7);				/* DEBUG(); */ ASSERT_3(4, 5, 7);
 
-	hw_int_ll_push_front(list, 1);				/* DEBUG(); */ ASSERT_4(1, 4, 5, 7);
-	hw_int_ll_push_front(list, 6);				/* DEBUG(); */ ASSERT_5(6, 1, 4, 5, 7);
+	hw_int_list_push_front(l, 1);				/* DEBUG(); */ ASSERT_4(1, 4, 5, 7);
+	hw_int_list_push_front(l, 6);				/* DEBUG(); */ ASSERT_5(6, 1, 4, 5, 7);
 
-	hw_int_ll_remove(list, 0);					/* DEBUG(); */ ASSERT_4(1, 4, 5, 7);
-	hw_int_ll_remove(list, 2);					/* DEBUG(); */ ASSERT_3(1, 4, 7);
+	hw_int_list_remove(l, 0);					/* DEBUG(); */ ASSERT_4(1, 4, 5, 7);
+	hw_int_list_remove(l, 2);					/* DEBUG(); */ ASSERT_3(1, 4, 7);
 
-	idx = hw_int_ll_size(list) - 1;
-	hw_int_ll_insert_before(list, idx, 3);		/* DEBUG(); */ ASSERT_4(1, 4, 3, 7);
+	idx = hw_int_list_size(l) - 1;
+	hw_int_list_insert_before(l, idx, 3);		/* DEBUG(); */ ASSERT_4(1, 4, 3, 7);
 
-	idx = hw_int_ll_size(list) - 1;
-	hw_int_ll_insert_after(list, idx, 8);		/* DEBUG(); */ ASSERT_5(1, 4, 3, 7, 8);
+	idx = hw_int_list_size(l) - 1;
+	hw_int_list_insert_after(l, idx, 8);		/* DEBUG(); */ ASSERT_5(1, 4, 3, 7, 8);
 
-	hw_int_ll_pop_front(list);					/* DEBUG(); */ ASSERT_4(4, 3, 7, 8);
+	hw_int_list_pop_front(l);					/* DEBUG(); */ ASSERT_4(4, 3, 7, 8);
 
-	hw_int_ll_free(&list);
+	hw_int_list_destroy(&l);
 	return 0;
 }

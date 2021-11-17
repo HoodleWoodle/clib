@@ -3,6 +3,12 @@
 
 #include "common.h"
 
+#define NAME list
+#define NAME_T JOIN(NAME, _t)
+
+#define NAME_NODE JOIN(NAME, n)
+#define NAME_NODE_T JOIN(NAME_NODE, _t)
+
 // void* list
 #undef ELEM_TYPE
 #define ELEM_TYPE void*
